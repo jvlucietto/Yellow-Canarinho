@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://conwamol2si7x"
+path="res://.godot/imported/grama 3.mp3-624d515e12daa5ec8b7098642b88de02.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/grama 3.mp3"
+dest_files=["res://.godot/imported/grama 3.mp3-624d515e12daa5ec8b7098642b88de02.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

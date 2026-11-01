@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://cgntkctwbikx4"]
+
+[ext_resource type="Texture2D" uid="uid://du15h5hdydsin" path="res://assets/sprites/snake.png" id="1_16tbv"]
+[ext_resource type="Script" uid="uid://b0c1h1pbfsndo" path="res://Scenes/snake.gd" id="1_pox6b"]
+[ext_resource type="PackedScene" uid="uid://cqdd12vv7w7xm" path="res://Scenes/enemy_killing_area.tscn" id="3_rku0m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pox6b"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rku0m"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmvgn"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnn8g"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p48en"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tu6o"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1exp"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpoka"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjxvt"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(0, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf0t3"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(32, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sunx"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(64, 32, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmxil"]
+atlas = ExtResource("1_16tbv")
+region = Rect2(96, 32, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kaj0w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pox6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rku0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmvgn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnn8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p48en")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tu6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1exp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpoka")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjxvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf0t3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sunx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmxil")
+}],
+"loop": false,
+"name": &"slithering",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rku0m"]
+size = Vector2(20, 3)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rku0m"]
+radius = 4.0
+height = 18.0
+
+[node name="Snake" type="CharacterBody2D" unique_id=302468049]
+script = ExtResource("1_pox6b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2083988665]
+sprite_frames = SubResource("SpriteFrames_kaj0w")
+animation = &"slithering"
+autoplay = "idle"
+
+[node name="enemyKillingArea" parent="." unique_id=989950592 instance=ExtResource("3_rku0m")]
+position = Vector2(-2, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemyKillingArea" unique_id=958924896]
+light_mask = 7
+visibility_layer = 7
+shape = SubResource("RectangleShape2D_rku0m")
+
+[node name="RayLeft" type="RayCast2D" parent="." unique_id=1831591875]
+target_position = Vector2(-67, 0)
+collision_mask = 2
+
+[node name="RayRight" type="RayCast2D" parent="." unique_id=1114109390]
+target_position = Vector2(64, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2111797836]
+position = Vector2(-2, 4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_rku0m")
+
+[connection signal="body_entered" from="enemyKillingArea" to="." method="_on_enemy_killing_area_body_entered"]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://he7f7lpcflu"]
+
+[ext_resource type="Texture2D" uid="uid://cnt0yn3ylge0r" path="res://assets/sprites/fakeblock.png" id="1_cyan3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yahx"]
+size = Vector2(16, 7)
+
+[node name="fakeBlock" type="StaticBody2D" unique_id=1507530291]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2132234847]
+position = Vector2(8, 8)
+texture = ExtResource("1_cyan3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1712184272]
+position = Vector2(8, 3.5)
+shape = SubResource("RectangleShape2D_8yahx")

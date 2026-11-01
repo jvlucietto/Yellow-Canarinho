@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cqdd12vv7w7xm"]
+
+[ext_resource type="Script" uid="uid://ca0jd6krwwvd" path="res://Scenes/enemy_killing_area.gd" id="1_hioqk"]
+
+[node name="enemyKillingArea" type="Area2D" unique_id=989950592]
+collision_mask = 2
+script = ExtResource("1_hioqk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

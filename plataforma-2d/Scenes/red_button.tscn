@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://cupt0enmt2ha5"]
+
+[ext_resource type="Texture2D" uid="uid://bcpi5nol34xd4" path="res://assets/sprites/red_buttton.png" id="1_3hi5a"]
+[ext_resource type="Script" uid="uid://dyyxoxdbyqqdv" path="res://Scenes/red_button.gd" id="1_8v4lg"]
+[ext_resource type="AudioStream" uid="uid://di1i7m7p8j66d" path="res://assets/sounds/oneUpsong.mp3" id="3_bh535"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v4lg"]
+atlas = ExtResource("1_3hi5a")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bh535"]
+atlas = ExtResource("1_3hi5a")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nyw5k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8v4lg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bh535")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8v4lg")
+}],
+"loop": false,
+"name": &"buttonPressed",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8s6g"]
+size = Vector2(12, 7.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8v4lg"]
+size = Vector2(11, 6.5)
+
+[node name="red button" type="Area2D" unique_id=606071567]
+collision_mask = 2
+script = ExtResource("1_8v4lg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=183023125]
+sprite_frames = SubResource("SpriteFrames_nyw5k")
+animation = &"buttonPressed"
+frame = 2
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1527873397]
+light_mask = 3
+position = Vector2(0, 1.25)
+shape = SubResource("RectangleShape2D_f8s6g")
+
+[node name="Node2D" type="StaticBody2D" parent="." unique_id=866819966]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D" unique_id=1838238985]
+position = Vector2(0, 1.75)
+shape = SubResource("RectangleShape2D_8v4lg")
+
+[node name="doors_opened" type="AudioStreamPlayer" parent="." unique_id=1954033822]
+stream = ExtResource("3_bh535")
+volume_db = -7.37
+pitch_scale = 3.4
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
